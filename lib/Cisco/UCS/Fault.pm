@@ -4,8 +4,9 @@ use strict;
 use warnings;
 
 use Carp		qw(croak);
+use Scalar::Util	qw(weaken);
 
-our $VERSION	= '0.1';
+our $VERSION	= '0.11';
 
 our @ATTRIBUTES	= qw(ack code cause created dn id occur rule severity tags type);
 
@@ -22,6 +23,7 @@ sub new {
         my $self = {}; 
         bless $self, $class;
         defined $args{dn}       ? $self->{dn} = $args{dn}               : croak 'dn not defined';
+        defined $args{ucs}      ? weaken($self->{ucs} = $args{ucs})	: croak 'ucs not defined';
         my %attr = %{$self->{ucs}->resolve_dn(dn => $self->{dn})->{outConfig}->{faultInst}};
 
         while (my ($k, $v) = each %attr) { $self->{$k} = $v }

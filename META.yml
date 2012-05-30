@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Cisco-UCS-Fault
-version:            0.1
+version:            0.11
 abstract:           Class for operations with Cisco UCS fault instances.
 author:
     - Luke Poskitt <ltp@cpan.org>
